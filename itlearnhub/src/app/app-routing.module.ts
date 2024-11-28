@@ -13,22 +13,25 @@ import { LessonManagementComponent } from './lesson-management/lesson-management
 import { InteractiveModuleComponent } from './interactive-module/interactive-module.component';
 import { CommunicationComponent } from './communication/communication.component';
 import { StudentCoursesComponent } from './student-courses/student-courses.component';
+import { AuthGuard } from './auth.guard';
 
 
 const routes: Routes = [
   { path: '', component: HomeComponent }, // Главная страница
+  { path: '', redirectTo: '/visitor-home', pathMatch: 'full' },
   
   
+  // { path: '', component: VisitorViewComponent },
+  { path: 'student', component: StudentProfileComponent, canActivate: [AuthGuard], data: { role: 'student' } },
+  { path: 'teacher', component: TeacherProfileComponent, canActivate: [AuthGuard], data: { role: 'teacher' } },
   
-  { path: '', redirectTo: '/student-profile', pathMatch: 'full' }, // Redirect по умолчанию
-  
-  { path: 'student-profile', component: StudentProfileComponent },
+ 
   { path: 'catalog', component: CourseCatalogComponent }, // Каталог курсов
   { path: 'course/:id', component: CoursePageComponent }, // Страница курса
   { path: 'student-courses', component: StudentCoursesComponent },
   { path: 'student-course/:id', component: StudentCourseComponent },
 
-  { path: 'teacher-profile', component: TeacherProfileComponent },
+  
   { path: 'teacher/lessons', component: LessonManagementComponent }, // Управление уроками
   { path: 'create-course/:id', component: CreateCourseComponent },
   { path: 'course-management/:id', component: CourseManagementComponent },

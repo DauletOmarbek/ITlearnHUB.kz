@@ -37,6 +37,27 @@
       <span class="user-name">John Doe</span>
     </div>
   </div>
+
+  <div>
+    <h1>Welcome, {{ user?.name }}</h1>
+    <button (click)="switchToVisitor()">Switch to Visitor</button>
+    <button (click)="switchToStudent()">Switch to Student</button>
+    <button (click)="switchToTeacher()">Switch to Teacher</button>
+  </div>
+  
+  <ng-container *ngIf="authService.isVisitor(); else loggedInView">
+    Visitor
+  </ng-container>
+  
+  <ng-template #loggedInView>
+    <ng-container *ngIf="authService.isStudent(); else teacherView">
+      Student
+    </ng-container>
+  </ng-template>
+  
+  <ng-template #teacherView>
+    Teacher
+  </ng-template>
   
   
   
