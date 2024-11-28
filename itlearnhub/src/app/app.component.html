@@ -38,6 +38,10 @@
     </div>
   </div>
 
+  <nav *ngIf="showNavbar">
+    <!-- Код вашего navbar -->
+  </nav>
+
   <div>
     <h1>Welcome, {{ user?.name }}</h1>
     <button (click)="switchToVisitor()">Switch to Visitor</button>

@@ -1,4 +1,6 @@
 import { NgModule } from '@angular/core';
+import { RegisterComponent } from './register/register.component';
+import { NoNavbarLayoutComponent } from './no-navbar-layout/no-navbar-layout.component';
 import { RouterModule, Routes } from '@angular/router';
 import { StudentProfileComponent } from './student-profile/student-profile.component';
 import { TeacherProfileComponent } from './teacher-profile/teacher-profile.component';
@@ -17,10 +19,17 @@ import { AuthGuard } from './auth.guard';
 
 
 const routes: Routes = [
-  { path: '', component: HomeComponent }, // Главная страница
-  { path: '', redirectTo: '/visitor-home', pathMatch: 'full' },
-  
-  
+  { path: '', redirectTo: '/register', pathMatch: 'full' },
+  {
+    path: 'register',
+    component: NoNavbarLayoutComponent,
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./register/register.component').then(m => m.RegisterComponent),
+      },
+    ],
+  },
   // { path: '', component: VisitorViewComponent },
   { path: 'student', component: StudentProfileComponent, canActivate: [AuthGuard], data: { role: 'student' } },
   { path: 'teacher', component: TeacherProfileComponent, canActivate: [AuthGuard], data: { role: 'teacher' } },

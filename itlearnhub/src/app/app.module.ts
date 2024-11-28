@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
-import { ReactiveFormsModule } from '@angular/forms'; // Импорт ReactiveFormsModule
+import { ReactiveFormsModule, FormsModule } from '@angular/forms'; // Импорт ReactiveFormsModule
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { CourseCatalogComponent } from './course-catalog/course-catalog.component';
@@ -15,7 +15,8 @@ import { LessonManagementComponent } from './lesson-management/lesson-management
 import { InteractiveModuleComponent } from './interactive-module/interactive-module.component';
 import { CommunicationComponent } from './communication/communication.component';
 import { StudentCoursesComponent } from './student-courses/student-courses.component';
-
+import { HttpClientModule } from '@angular/common/http';
+import { RegisterComponent } from './register/register.component'; // Импорт компонента регистрации
 import { SafeUrlPipe } from './safe-url.pipe';
 
 
@@ -41,6 +42,10 @@ import { SafeUrlPipe } from './safe-url.pipe';
     RouterModule,
     AppRoutingModule,
     ReactiveFormsModule,
+
+    FormsModule, // Добавьте сюда
+    HttpClientModule,
+    RegisterComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],

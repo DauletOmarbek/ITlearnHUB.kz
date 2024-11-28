@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 import { AuthService } from './auth.service';
 
 @Component({
@@ -8,12 +9,22 @@ import { AuthService } from './auth.service';
 })
 export class AppComponent implements OnInit {
   title = 'itlearnhub';
+  showNavbar: boolean = true;
   user: { role: 'visitor' | 'student' | 'teacher'; name: string } | null = null;
 
-  constructor(public authService: AuthService) {} // Теперь public
+  constructor(private router: Router, public authService: AuthService) {
+    // Подписываемся на события роутера
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        // Показать или скрыть navbar в зависимости от текущего маршрута
+        this.showNavbar = !event.url.includes('/register');
+      }
+    });
+  }
 
   ngOnInit(): void {
-    this.user = this.authService.getCurrentUser(); // Инициализация внутри ngOnInit
+    // Инициализация пользователя
+    this.user = this.authService.getCurrentUser();
   }
 
   switchToVisitor() {
