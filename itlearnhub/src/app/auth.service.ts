@@ -8,8 +8,8 @@ export class AuthService {
 
   constructor() {}
 
-  setRole(role: 'visitor' | 'student' | 'teacher') {
-    localStorage.setItem(this.roleKey, role); // Сохраняем роль в LocalStorage
+  setRole(role: 'visitor' | 'student' | 'teacher'): void {
+    localStorage.setItem(this.roleKey, role);
   }
 
   getRole(): 'visitor' | 'student' | 'teacher' {

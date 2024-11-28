@@ -26,16 +26,16 @@ const routes: Routes = [
   { path: 'teacher', component: TeacherProfileComponent, canActivate: [AuthGuard], data: { role: 'teacher' } },
   
  
-  { path: 'catalog', component: CourseCatalogComponent }, // Каталог курсов
-  { path: 'course/:id', component: CoursePageComponent }, // Страница курса
-  { path: 'student-courses', component: StudentCoursesComponent },
-  { path: 'student-course/:id', component: StudentCourseComponent },
+  { path: 'catalog', component: CourseCatalogComponent, canActivate: [AuthGuard], data: { roles: ['student', 'visitor'] } },
+  { path: 'course/:id', component: CoursePageComponent, canActivate: [AuthGuard], data: { role: 'student' }  }, // Страница курса
+  { path: 'student-courses', component: StudentCoursesComponent, canActivate: [AuthGuard], data: { role: 'student' }  },
+  { path: 'student-course/:id', component: StudentCourseComponent, canActivate: [AuthGuard], data: { role: 'student' }  },
 
   
-  { path: 'teacher/lessons', component: LessonManagementComponent }, // Управление уроками
-  { path: 'create-course/:id', component: CreateCourseComponent },
-  { path: 'course-management/:id', component: CourseManagementComponent },
-  { path: 'teacher/dashboard', component: TeacherDashboardComponent }, // Личный кабинет преподавателя
+  { path: 'teacher/lessons', component: LessonManagementComponent, canActivate: [AuthGuard], data: { role: 'teacher' } }, // Управление уроками
+  { path: 'create-course/:id', component: CreateCourseComponent, canActivate: [AuthGuard], data: { role: 'teacher' } },
+  { path: 'course-management/:id', component: CourseManagementComponent, canActivate: [AuthGuard], data: { role: 'teacher' } },
+  { path: 'teacher/dashboard', component: TeacherDashboardComponent, canActivate: [AuthGuard], data: { role: 'teacher' } }, // Личный кабинет преподавателя
   
   { path: 'interactive', component: InteractiveModuleComponent }, // Интерактивный модуль
   { path: 'communication', component: CommunicationComponent }, // Коммуникация

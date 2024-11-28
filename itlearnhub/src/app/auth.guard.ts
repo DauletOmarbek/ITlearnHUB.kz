@@ -9,15 +9,16 @@ export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    const requiredRole = route.data['role']; // Роль, указанная в маршруте
-    const currentRole = this.authService.getRole(); // Текущая роль пользователя
+    const allowedRoles: string[] = route.data['roles']; // Получаем список разрешённых ролей из маршрута
+    const currentRole = this.authService.getRole(); // Получаем текущую роль пользователя
 
-    if (requiredRole && requiredRole !== currentRole) {
-      // Если роль не совпадает, перенаправляем на страницу доступа
-      this.router.navigate(['/access-denied']);
-      return false;
+    // Проверяем, есть ли текущая роль в списке разрешённых
+    if (allowedRoles.includes(currentRole)) {
+      return true; // Доступ разрешён
     }
 
-    return true; // Доступ разрешён
+    // Если роль не соответствует, перенаправляем на другую страницу
+    this.router.navigate(['/access-denied']);
+    return false;
   }
 }
