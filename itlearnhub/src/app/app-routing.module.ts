@@ -19,17 +19,18 @@ import { AuthGuard } from './auth.guard';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/register', pathMatch: 'full' },
-  // {
-  //   path: 'register',
-  //   component: NoNavbarLayoutComponent,
-  //   children: [
-  //     {
-  //       path: '',
-  //       loadComponent: () => import('./register/register.component').then(m => m.RegisterComponent),
-  //     },
-  //   ],
-  // },
+  { path: '', component: HomeComponent }, // Главная страница
+  {
+    path: 'register',
+    component: NoNavbarLayoutComponent,
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./register/register.component').then(m => m.RegisterComponent),
+      },
+    ],
+  },
+  
   // { path: '', component: VisitorViewComponent },
   { path: 'student', component: StudentProfileComponent, canActivate: [AuthGuard], data: { role: 'student' } },
   { path: 'teacher', component: TeacherProfileComponent, canActivate: [AuthGuard], data: { role: 'teacher' } },
