@@ -14,6 +14,7 @@ import { TeacherDashboardComponent } from './teacher-dashboard/teacher-dashboard
 import { LessonManagementComponent } from './lesson-management/lesson-management.component';
 import { InteractiveModuleComponent } from './interactive-module/interactive-module.component';
 import { CommunicationComponent } from './communication/communication.component';
+import { StudentCoursesComponent } from './student-courses/student-courses.component';
 
 import { SafeUrlPipe } from './safe-url.pipe';
 
@@ -31,6 +32,7 @@ import { SafeUrlPipe } from './safe-url.pipe';
     LessonManagementComponent,
     InteractiveModuleComponent,
     CommunicationComponent,
+    StudentCoursesComponent,
 
     SafeUrlPipe
   ],

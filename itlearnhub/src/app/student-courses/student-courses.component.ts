@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-lesson-management',
-  templateUrl: './lesson-management.component.html',
-  styleUrl: './lesson-management.component.css'
+  selector: 'app-student-courses',
+  templateUrl: './student-courses.component.html',
+  styleUrl: './student-courses.component.css'
 })
-export class LessonManagementComponent {
-filteredCourses = [
+export class StudentCoursesComponent {
+  filteredCourses = [
     {
       title: 'Introduction to Angular',
       description: 'Learn the basics of Angular, a powerful framework for building web applications.',
