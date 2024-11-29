@@ -1,42 +1,40 @@
-<!-- header.component.html -->
 <div class="header">
-    <!-- Логотип сайта -->
-    <div class="logo">
-      <img src="assets/logo.png" alt="Site Logo" class="logo-icon"> <!-- Замените "assets/logo.png" на путь к вашему логотипу -->
-      <a routerLink="/" ><span class="logo-text">MyEdu</span></a>
-    </div>
-  
-    <!-- Строка поиска -->
-    <div class="search-bar">
-      <input type="text" placeholder="Search for courses..." >
-      <!-- <input type="text" placeholder="Search for courses..." [(ngModel)]="searchTerm"> -->
-      <button routerLink="catalog" class="search-btn">🔍</button>
-    </div>
-  
-    <!-- Фильтры -->
-    <div class="filters">
-      <label for="category">Category:</label>
-      <select id="category" class="filter-dropdown">
-      <!-- <select id="category" [(ngModel)]="selectedCategory" class="filter-dropdown"> -->
-        <option value="">All Categories</option>
-        <option value="development">Development</option>
-        <option value="design">Design</option>
-        <option value="business">Business</option>
-      </select>
-    </div>
-  
+  <!-- Логотип сайта -->
+  <div class="logo">
+    <img src="\assets\image.png" alt="Site Logo" class="logo-icon">
+    <a routerLink="/"><span class="logo-text">ItLearnHub</span></a>
+  </div>
+
+  <!-- Ссылки и профиль -->
+  <div class="right-section">
+    <!-- Профиль пользователя -->
+    <a *ngIf="!authService.isVisitor()" [routerLink]="authService.isTeacher() ? '/teacher' : '/student'">
+      <div class="user-profile">
+        <img src="https://via.placeholder.com/150" alt="User Avatar" class="user-avatar">
+        <span class="user-name">
+          {{ authService.isTeacher() ? 'Teacher' : 'Student' }}
+        </span>
+      </div>
+    </a>
+
     <!-- Ссылки на обучение -->
     <nav class="nav-links">
-      <a routerLink="/my-courses">My Courses</a>
-      <a routerLink="/progress">Progress</a>
+      <a *ngIf="authService.isStudent()" routerLink="/student-courses">My Courses</a>
+      <a *ngIf="authService.isStudent()" routerLink="/progress">Progress</a>
+      <a *ngIf="authService.isTeacher()" routerLink="/teacher-lessons">My Courses</a>
     </nav>
-  
-    <!-- Профиль пользователя -->
-    <div class="user-profile">
-      <img src="assets/user-avatar.png" alt="User Avatar" class="user-avatar"> <!-- Замените "assets/user-avatar.png" на путь к вашему аватару -->
-      <span class="user-name">John Doe</span>
+
+    <!-- Кнопка входа/выхода -->
+    <div class="auth-action">
+      <a *ngIf="authService.isVisitor()" routerLink="/register" class="auth-button">Login</a>
+      <a *ngIf="!authService.isVisitor()" routerLink="/register" >Logout</a>
     </div>
   </div>
+</div>
+
+
+  
+
 
   <nav *ngIf="showNavbar">
     <!-- Код вашего navbar -->

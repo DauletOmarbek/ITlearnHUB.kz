@@ -87,64 +87,66 @@ body {
   cursor: pointer;
 }
 
-/* Список курсов */
 .courses-list {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
+  flex-wrap: wrap; /* Позволяет переносить карточки на следующую строку */
+  gap: 16px; /* Отступы между карточками */
+  justify-content: center; /* Центрирование карточек */
+  padding: 16px;
 }
 
-/* Карточки курсов */
 .course-card {
   display: flex;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
+  flex-direction: column; /* Содержимое карточки располагается вертикально */
+  align-items: center; /* Центрируем содержимое */
+  width: 20%; /* Фиксированная ширина карточки */
+  background-color: #fff; /* Белый фон карточки */
+  border: 1px solid #ddd; /* Легкая граница */
+  border-radius: 8px; /* Закругленные углы */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Легкая тень */
+  padding: 16px;
+  text-align: center; /* Текст в центре */
 }
 
 .course-card img {
-  width: 150px;
-  height: auto;
-  border-radius: 10px 0 0 10px;
+  width: 100%; /* Изображение занимает всю ширину карточки */
+  height: auto; /* Пропорциональная высота */
+  border-radius: 8px 8px 0 0; /* Закругленные углы сверху */
 }
 
 .course-info {
-  padding: 15px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  margin-top: 12px;
 }
 
 .course-info h3 {
-  font-size: 1.4em;
-  color: #333;
-  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 8px 0;
 }
 
 .course-info p {
-  font-size: 1em;
-  color: #555;
-  margin: 10px 0;
+  font-size: 14px;
+  color: #666;
+  margin: 8px 0;
 }
 
 .course-meta {
-  font-size: 0.9em;
-  color: #777;
-  margin-bottom: 15px;
+  font-size: 12px;
+  color: #888;
+  margin: 8px 0;
 }
 
 .btn-secondary {
+  margin-top: 12px;
   padding: 8px 16px;
-  font-size: 0.9em;
-  background-color: #007BFF;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
+  background-color: #007bff; /* Синий фон кнопки */
+  color: #fff; /* Белый текст */
+  border: none; /* Без границы */
+  border-radius: 4px; /* Закругленные углы кнопки */
   cursor: pointer;
-  align-self: flex-start;
+  transition: background-color 0.3s;
 }
 
 .btn-secondary:hover {
-  background-color: #0056b3;
+  background-color: #0056b3; /* Более тёмный синий при наведении */
 }

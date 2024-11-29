@@ -41,4 +41,5 @@ export class AppComponent implements OnInit {
     this.authService.setRole('teacher');
     this.user = this.authService.getCurrentUser();
   }
+  
 }
