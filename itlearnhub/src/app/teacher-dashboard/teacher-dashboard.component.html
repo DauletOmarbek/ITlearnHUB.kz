@@ -39,7 +39,7 @@
         <div *ngFor="let session of liveSessions" class="session-card">
           <p><strong>{{ session.title }}</strong></p>
           <p>Course: {{ session.course }}</p>
-          <p>Date: {{ session.date | date }}</p>
+          <!-- <p>Date: {{ session.date | date }}</p> -->
           <p>Time: {{ session.time }}</p>
           <button (click)="editSession(session)">Edit</button>
           <button (click)="deleteSession(session)">Delete</button>

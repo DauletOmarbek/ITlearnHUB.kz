@@ -9,37 +9,69 @@ import { AuthService } from './auth.service';
 })
 export class AppComponent implements OnInit {
   title = 'itlearnhub';
-  showNavbar: boolean = true;
   user: { role: 'visitor' | 'student' | 'teacher'; name: string } | null = null;
+  loginEmail: string = '';
+  loginPassword: string = '';
+  showNavbar: boolean = true;
 
   constructor(private router: Router, public authService: AuthService) {
-    // Подписываемся на события роутера
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        // Показать или скрыть navbar в зависимости от текущего маршрута
         this.showNavbar = !event.url.includes('/register');
       }
     });
   }
 
   ngOnInit(): void {
-    // Инициализация пользователя
-    this.user = this.authService.getCurrentUser();
+    this.authService.getCurrentUser().subscribe(
+      (user) => {
+        this.user = user;
+      },
+      (error) => {
+        console.error('Error fetching user:', error);
+        this.user = { role: 'visitor', name: 'Visitor' }; // Установка значения по умолчанию
+      }
+    );
   }
 
-  switchToVisitor() {
+  logout(): void {
+    this.authService.logout();
+    this.authService.getCurrentUser().subscribe(
+      (user) => {
+        this.user = user;
+      },
+      (error) => {
+        console.error('Error after logout:', error);
+        this.user = { role: 'visitor', name: 'Visitor' };
+      }
+    );
+    alert('You have been logged out.');
+  }
+
+  switchToVisitor(): void {
     this.authService.setRole('visitor');
-    this.user = this.authService.getCurrentUser();
+    this.updateUserState();
   }
 
-  switchToStudent() {
+  switchToStudent(): void {
     this.authService.setRole('student');
-    this.user = this.authService.getCurrentUser();
+    this.updateUserState();
   }
 
-  switchToTeacher() {
+  switchToTeacher(): void {
     this.authService.setRole('teacher');
-    this.user = this.authService.getCurrentUser();
+    this.updateUserState();
   }
-  
+
+  private updateUserState(): void {
+    this.authService.getCurrentUser().subscribe(
+      (user) => {
+        this.user = user;
+      },
+      (error) => {
+        console.error('Error updating user:', error);
+        this.user = { role: 'visitor', name: 'Visitor' };
+      }
+    );
+  }
 }

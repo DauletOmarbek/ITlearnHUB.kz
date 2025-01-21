@@ -1,0 +1,61 @@
+<div class="auth-container">
+    <h2>Sign Up</h2>
+    <form (ngSubmit)="register()">
+      <!-- <input type="hidden" [value]="csrfToken" name="csrfmiddlewaretoken" /> -->
+      <label for="email">Email:</label>
+      <input
+        type="email"
+        id="email"
+        [(ngModel)]="email"
+        name="email"
+        required
+      />
+  
+      <label for="firstName">First Name:</label>
+      <input
+        type="text"
+        id="firstName"
+        [(ngModel)]="firstName"
+        name="firstName"
+        required
+      />
+  
+      <label for="lastName">Last Name:</label>
+      <input
+        type="text"
+        id="lastName"
+        [(ngModel)]="lastName"
+        name="lastName"
+        required
+      />
+  
+      <label for="password">Password:</label>
+      <input
+        type="password"
+        id="password"
+        [(ngModel)]="password1"
+        name="password"
+        required
+      />
+  
+      <label for="passwordConfirmation">Confirm Password:</label>
+      <input
+        type="password"
+        id="passwordConfirmation"
+        [(ngModel)]="password2"
+        name="passwordConfirmation"
+        required
+      />
+  
+      <label for="role">Role:</label>
+      <select id="role" [(ngModel)]="role" name="role" required>
+        <option value="student">Student</option>
+        <option value="teacher">Teacher</option>
+      </select>
+  
+      <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+  
+      <button type="submit">Sign Up</button>
+    </form>
+  </div>
+  

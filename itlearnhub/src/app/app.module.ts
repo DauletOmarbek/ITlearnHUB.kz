@@ -15,15 +15,23 @@ import { LessonManagementComponent } from './lesson-management/lesson-management
 import { InteractiveModuleComponent } from './interactive-module/interactive-module.component';
 import { CommunicationComponent } from './communication/communication.component';
 import { StudentCoursesComponent } from './student-courses/student-courses.component';
-import { HttpClientModule } from '@angular/common/http';
-import { RegisterComponent } from './register/register.component'; // Импорт компонента регистрации
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SafeUrlPipe } from './safe-url.pipe';
+
+import { LoginComponent } from './login/login.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { LogoutComponent } from './logout/logout.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+
+    LoginComponent,
+    SignUpComponent,
+    LogoutComponent,
+
     CourseCatalogComponent,
     CoursePageComponent,
     CreateCourseComponent,
@@ -42,10 +50,8 @@ import { SafeUrlPipe } from './safe-url.pipe';
     RouterModule,
     AppRoutingModule,
     ReactiveFormsModule,
-
-    FormsModule, // Добавьте сюда
+    FormsModule,
     HttpClientModule,
-    RegisterComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],

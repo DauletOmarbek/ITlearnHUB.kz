@@ -1,6 +1,4 @@
 import { NgModule } from '@angular/core';
-import { RegisterComponent } from './register/register.component';
-import { NoNavbarLayoutComponent } from './no-navbar-layout/no-navbar-layout.component';
 import { RouterModule, Routes } from '@angular/router';
 import { StudentProfileComponent } from './student-profile/student-profile.component';
 import { TeacherProfileComponent } from './teacher-profile/teacher-profile.component';
@@ -17,12 +15,18 @@ import { CommunicationComponent } from './communication/communication.component'
 import { StudentCoursesComponent } from './student-courses/student-courses.component';
 import { AuthGuard } from './auth.guard';
 
+import { LoginComponent } from './login/login.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { LogoutComponent } from './logout/logout.component';
+
 
 const routes: Routes = [
+  { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SignUpComponent },
+  // { path: 'profile', component: UserProfileComponent },
+  { path: 'logout', component: LogoutComponent },
+
   { path: '', component: HomeComponent }, // Главная страница
-  {
-    path: 'register', component: RegisterComponent },
-  
   // { path: '', component: VisitorViewComponent },
   { path: 'student', component: StudentProfileComponent, canActivate: [AuthGuard], data: { roles: 'student' } },
   { path: 'teacher', component: TeacherProfileComponent, canActivate: [AuthGuard], data: { roles: 'teacher' } },

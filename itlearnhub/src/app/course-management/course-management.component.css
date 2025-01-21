@@ -104,6 +104,14 @@ button:not(:last-child) {
   background-color: #ffffff;
 }
 
+.add-button {
+  margin-top: 20px;
+}
+
+.remove {
+  background-color: rgb(80, 80, 80);
+}
+
 /* Адаптивность */
 @media (max-width: 768px) {
   form {
