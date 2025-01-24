@@ -10,8 +10,8 @@
     <!-- Профиль пользователя -->
     <div class="user-profile">
       <img src="image.png" alt="User Avatar" class="user-avatar" />
-      <a *ngIf="authService.isTeacher()">Teacher</a>
-      <a *ngIf="authService.isStudent()">Student</a>
+      <a *ngIf="authService.isTeacher()">Teacher  {{user?.name}}</a>
+      <a *ngIf="authService.isStudent()">Student  {{user?.name}}</a>
       <a *ngIf="authService.isVisitor()">Visitor</a>
     </div>
 
@@ -36,9 +36,3 @@
 
 <router-outlet></router-outlet>
 
-<div>
-  <h1>Welcome, {{ user?.name }}</h1>
-  <button (click)="switchToVisitor()">Switch to Visitor</button>
-  <button (click)="switchToStudent()">Switch to Student</button>
-  <button (click)="switchToTeacher()">Switch to Teacher</button>
-</div>

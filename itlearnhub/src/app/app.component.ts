@@ -12,39 +12,33 @@ export class AppComponent implements OnInit {
   user: { role: 'visitor' | 'student' | 'teacher'; name: string } | null = null;
   loginEmail: string = '';
   loginPassword: string = '';
-  showNavbar: boolean = true;
 
   constructor(private router: Router, public authService: AuthService) {
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        this.showNavbar = !event.url.includes('/register');
-      }
-    });
   }
 
   ngOnInit(): void {
-    this.authService.getCurrentUser().subscribe(
-      (user) => {
-        this.user = user;
-      },
-      (error) => {
-        console.error('Error fetching user:', error);
-        this.user = { role: 'visitor', name: 'Visitor' }; // Установка значения по умолчанию
+    const storedUser = localStorage.getItem('userData');
+    if (storedUser) {
+      const userData = JSON.parse(storedUser);
+  
+      // Проверяем, существуют ли first_name и role в данных
+      if (userData.first_name && userData.role) {
+        this.user = {
+          name: userData.first_name,
+          role: userData.role
+        };
+        this.authService.setRole(this.user.role);
       }
-    );
+    } else {
+      this.user = { name: 'Guest', role: 'visitor' };  // Значения по умолчанию
+    }
+    
   }
 
   logout(): void {
+    this.router.navigate(['/login']);
+    this.authService.setRole("visitor");
     this.authService.logout();
-    this.authService.getCurrentUser().subscribe(
-      (user) => {
-        this.user = user;
-      },
-      (error) => {
-        console.error('Error after logout:', error);
-        this.user = { role: 'visitor', name: 'Visitor' };
-      }
-    );
     alert('You have been logged out.');
   }
 

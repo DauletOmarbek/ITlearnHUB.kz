@@ -14,12 +14,17 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  login(): void {
-    if (this.authService.login(this.email, this.password)) {
-      const role = this.authService.getRole();
-      this.router.navigate([role === 'teacher' ? '/teacher-dashboard' : '/student-dashboard']);
-    } else {
-      this.errorMessage = 'Invalid email or password.';
-    }
+  login() {
+      this.authService.login(this.email, this.password).subscribe(
+        (response) => {
+          alert('Login successful!');
+          console.log('User:', response.user);
+          this.authService.getUserDetails(this.email)
+          this.router.navigate(['/'])
+        },
+        (error) => {
+          this.errorMessage = 'Invalid email or password.';
+        }
+      );
   }
 }

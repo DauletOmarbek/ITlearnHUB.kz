@@ -21,17 +21,12 @@ import { LogoutComponent } from './logout/logout.component';
 
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent, canActivate: [AuthGuard], data: { roles: ['student', 'visitor'] } },
   { path: 'signup', component: SignUpComponent },
-  // { path: 'profile', component: UserProfileComponent },
   { path: 'logout', component: LogoutComponent },
-
-  { path: '', component: HomeComponent }, // Главная страница
-  // { path: '', component: VisitorViewComponent },
+  { path: '', component: HomeComponent },
   { path: 'student', component: StudentProfileComponent, canActivate: [AuthGuard], data: { roles: 'student' } },
   { path: 'teacher', component: TeacherProfileComponent, canActivate: [AuthGuard], data: { roles: 'teacher' } },
-  
- 
   { path: 'catalog', component: CourseCatalogComponent, canActivate: [AuthGuard], data: { roles: ['student', 'visitor'] } },
   { path: 'course/:id', component: CoursePageComponent, canActivate: [AuthGuard], data: { roles: ['student', 'visitor'] }  }, // Страница курса
   { path: 'student-courses', component: StudentCoursesComponent, canActivate: [AuthGuard], data: { roles: 'student' }  },

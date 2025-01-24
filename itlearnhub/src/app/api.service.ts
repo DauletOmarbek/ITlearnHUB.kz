@@ -1,18 +1,23 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  private baseUrl = 'http://127.0.0.1:8000/api/';  // Базовый URL API
+  private baseUrl = 'http://127.0.0.1:8000/';  // Базовый URL API
 
   constructor(private http: HttpClient) {}
-
+  
   // Получение списка данных
   getCourses(): Observable<any> {
-    return this.http.get(`${this.baseUrl}courses/`);
+    return this.http.get(`${this.baseUrl}api/courses/`);
+  }
+
+  // Получение списка данных
+  getCoursesforStudent(): Observable<any> {
+    return this.http.get(`${this.baseUrl}my_enrolled_courses/`);
   }
 
   // Получение конкретного курса по ID
@@ -35,8 +40,4 @@ export class ApiService {
     return this.http.delete(`${this.baseUrl}courses/${id}/`);
   }
 
-  // Вход пользователя
-  loginUser(credentials: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}auth/login/`, credentials);
-  }
 }

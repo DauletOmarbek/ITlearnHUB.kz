@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-sign-up',
@@ -15,7 +17,7 @@ export class SignUpComponent {
   role = 'student';
   errorMessage = '';
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router) {
   }
 
   register() {
@@ -33,11 +35,22 @@ export class SignUpComponent {
       role: this.role,
     };
 
-    this.authService.getCsrfToken();
+    // this.authService.getCsrfToken();
     setTimeout(() => {
     this.authService.signUp(userData).subscribe(
     (response) => {
       console.log('Registration successful', response);
+      this.authService.login(this.email, this.password1).subscribe(
+        (response) => {
+          alert('Login successful!');
+          console.log('User:', response.user);
+          this.authService.getUserDetails(this.email)
+          this.router.navigate(['/'])
+        },
+        (error) => {
+          this.errorMessage = 'Invalid email or password.';
+        }
+      );
     },
     (error) => {
       console.error('Registration error:', error);
